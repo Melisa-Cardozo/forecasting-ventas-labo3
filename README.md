@@ -1,4 +1,4 @@
-<img width="603" height="174" alt="image" src="https://github.com/user-attachments/assets/4b9c01d9-2617-4d68-b456-c8a8db659eaa" /># Predicción de Ventas por Producto – Laboratorio III (Universidad Austral)
+# Predicción de Ventas por Producto – Laboratorio III (Universidad Austral)
 
 Este proyecto fue realizado en el marco de la materia **Laboratorio III** de la Maestría en Ciencia de Datos. El objetivo fue predecir las ventas de febrero 2020 para 780 productos, utilizando datos históricos mensuales (archivo `sell-in.txt`) y una lista de productos objetivo (`780_a_predecir.txt`).
 
