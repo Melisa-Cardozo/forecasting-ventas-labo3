@@ -1,4 +1,4 @@
-# Predicción de Ventas por Producto – Laboratorio III (Universidad Austral)
+<img width="603" height="174" alt="image" src="https://github.com/user-attachments/assets/4b9c01d9-2617-4d68-b456-c8a8db659eaa" /># Predicción de Ventas por Producto – Laboratorio III (Universidad Austral)
 
 Este proyecto fue realizado en el marco de la materia **Laboratorio III** de la Maestría en Ciencia de Datos. El objetivo fue predecir las ventas de febrero 2020 para 780 productos, utilizando datos históricos mensuales (archivo `sell-in.txt`) y una lista de productos objetivo (`780_a_predecir.txt`).
 
@@ -30,16 +30,17 @@ Este enfoque logró un RMSE público de **0.242**, superando todos los intentos 
 ## 📁 Estructura del repositorio
 
 
-├── noteboook_autogluon_final.ipynb 
-│ 
+forecasting-ventas-labo3/
+├── noteboook_autogluon_final.ipynb
 ├── data/
-│ └── sell-in.txt.gz # Histórico de ventas
-│ └── 780_a_predecir.txt
-| └── tb_productos.txt
+│   ├── sell-in.txt.gz               # Histórico de ventas
+│   ├── 780_a_predecir.txt
+│   └── tb_productos.txt
 ├── output/
-│ └── prediccion_mejor_autogluon.csv
+│   └── prediccion_mejor_autogluon.csv
 ├── src/
-│ └── requirements.txt
+│   └── main.py                      # Script reproducible
+├── requirements.txt
 └── README.md
 
 
