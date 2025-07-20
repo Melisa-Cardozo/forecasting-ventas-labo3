@@ -29,7 +29,7 @@ Este enfoque logró un RMSE público de **0.242**, superando todos los intentos 
 
 ## 📁 Estructura del repositorio
 
-
+```
 forecasting-ventas-labo3/
 ├── noteboook_autogluon_final.ipynb
 ├── data/
@@ -42,6 +42,8 @@ forecasting-ventas-labo3/
 │   └── main.py                      # Script reproducible
 ├── requirements.txt
 └── README.md
+```
+
 
 
 ## 🧪 Reproducibilidad
