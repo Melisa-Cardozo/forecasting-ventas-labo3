@@ -1,78 +1,67 @@
-# 📦 Predicción de Ventas por Producto - Laboratorio III (Maestría en Ciencia de Datos)
+# Predicción de Ventas por Producto – Laboratorio III (Universidad Austral)
 
-Este proyecto forma parte de la materia **Laboratorio de Implementación III** de la Maestría en Ciencia de Datos (Universidad Austral). El objetivo es predecir las ventas (en toneladas) por producto para el período **febrero 2020**, en el marco de una competencia privada de Kaggle con datos reales de distribución y consumo.
+Este proyecto fue realizado en el marco de la materia **Laboratorio III** de la Maestría en Ciencia de Datos. El objetivo fue predecir las ventas de febrero 2020 para 780 productos, utilizando datos históricos mensuales (archivo `sell-in.txt`) y una lista de productos objetivo (`780_a_predecir.txt`).
 
----
+## 🔍 Descripción del problema
 
-## 🎯 Objetivo
+La competencia consistía en generar un archivo de predicción `submission.csv` con la mejor precisión posible (menor RMSE). Se trabajó con series temporales mensuales por producto, sin segmentación adicional por cliente ni categoría.
 
-Predecir la cantidad de toneladas (`tn`) vendidas por cada uno de los **780 productos seleccionados** en el canal de distribución, para el mes **2020-02**, utilizando únicamente información anterior a esa fecha.
+## 📊 Estrategia de modelado
 
----
+Se exploraron múltiples alternativas:
+
+- Promedios móviles (3, 9 y 12 meses) – línea base inicial (RMSE ~0.270)
+- Modelos clásicos: ARIMA, SARIMA, RidgeCV, regresión lineal con lags
+- Modelos supervisados con PyCaret: regresión lineal, Random Forest, LightGBM
+- Generación manual y masiva de features por producto
+- Modelos automáticos con **AutoGluon TimeSeries**
+
+## 🏆 Modelo final seleccionado
+
+El modelo ganador fue entrenado con AutoGluon TimeSeries con la siguiente configuración:
+
+- `presets='best_quality'`
+- `num_val_windows=5`
+- `time_limit=3600` segundos
+- `set.seed=777`
+
+Este enfoque logró un RMSE público de **0.242**, superando todos los intentos anteriores.
 
 ## 📁 Estructura del repositorio
 
-├── data/ # Datasets o muestras (no se suben los originales pesados)
-├── notebooks/ # Exploración, análisis y pruebas
-├── src/ # Código limpio y funcional (predicción final)
-├── notebooks/modelos.ipynb: entrenamiento y evaluación de modelos
-├── submission/ # Archivos .csv listos para subir a Kaggle
+
+├── noteboook_autogluon_final.ipynb 
+│ 
+├── data/
+│ └── sell-in.txt.gz # Histórico de ventas
+│ └── 780_a_predecir.txt
+| └── tb_productos.txt
+├── output/
+│ └── prediccion_mejor_autogluon.csv
+├── src/
+│ └── requirements.txt
 └── README.md
 
 
----
+## 🧪 Reproducibilidad
 
-## 📦 Datasets utilizados
+1. Clonar el repositorio:
 
-Los datos fueron provistos por la cátedra e incluyen:
-
-- `sell-in.txt.gz`: ventas históricas por producto, cliente y mes
-- `tb_productos.txt`: catálogo de productos
-- `tb_stocks.txt`: niveles de stock mensuales por producto
-- `product_id_apredecir201912.txt`: listado oficial de los 780 productos a predecir
-
-> ⚠️ Por motivos de privacidad y tamaño, no se incluyen en este repositorio. Para reproducir el trabajo, colocarlos en la carpeta `/data`.
-
----
-
-## 🧠 Enfoque metodológico
-
-1. **Exploración de datos (EDA)**
-   - Análisis de distribución, estacionalidad y datos faltantes
-   - Uniones con catálogo de productos y stock
-
-2. **Modelos base (triviales)**
-   - Promedios móviles de 1, 3, 6, 9, 12 meses previos a 2020-02
-
-3. **Modelos estadísticos**
-   - ARIMA por producto (lento pero interpretable)
-
-4. **Modelos de machine learning**
-   - Regresores tipo LightGBM / Random Forest vía PyCaret
-   - Ingeniería de features: lags, fechas, categorías, stock
-
-5. **Evaluación y comparación**
-   - Métrica de competencia (por definir por la cátedra)
-   - Tabla comparativa de errores por modelo
-   - Justificación del modelo elegido
-
----
-
-## 📊 Resultados
-
-> (Aquí se incluirán gráficos, métricas y conclusiones una vez finalizado el proyecto.)
-
----
-
-## 🧩 Reproducibilidad
-
-Para ejecutar el proyecto, asegurate de tener las siguientes librerías instaladas:
-
-```bash
+```
+git clone https://github.com/Melisa-Cardozo/forecasting-ventas-labo3.git
+cd forecasting-ventas-labo3
+conda create -n laboratorio3 python=3.9
+conda activate laboratorio3
 pip install -r requirements.txt
+python src/main.py
+```
 
-✍️ Autor
+
+
+## 📌 Notas finales
+Se eligió AutoGluon por su rendimiento robusto sin requerir tuning intensivo.
+
+El modelo fue validado por score en el public leaderboard de Kaggle.
+
 Melisa Cardozo
 📍 MSc. Ciencia de Datos – Universidad Austral
-🌱 Enfocada en agtech, forecasting y sustentabilidad
-🔗 LinkedIn | Portfolio
